@@ -10,7 +10,7 @@ msg data;
 void onReceive(const uint8_t *mac_addr, const uint8_t *incomingData, int len) {
   if(len == sizeof(msg)) {
     memcpy(&data, incomingData, sizeof(data));
-    Serial.print("Empfangen: ");
+    Serial.print("Empfangen am Receiver: ");
     Serial.println(data.value);
   }
 }
@@ -20,7 +20,7 @@ void setup() {
   WiFi.mode(WIFI_STA);
 
   if (esp_now_init() != 0) {
-    Serial.println("Fehler beim Initialisieren von ESP-NOW");
+    Serial.println("ESP-NOW init failed");
     return;
   }
 
