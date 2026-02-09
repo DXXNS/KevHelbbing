@@ -1,5 +1,5 @@
-#include <esp_now.h>
 #include <WiFi.h>
+#include <esp_now.h>
 
 typedef struct msg {
   int value;
@@ -7,10 +7,12 @@ typedef struct msg {
 
 msg data;
 
-void onReceive(uint8_t *mac, uint8_t *incomingData, uint8_t len) {
-  memcpy(&data, incomingData, sizeof(data));
-  Serial.print("empfangen: ");
-  Serial.println(data.value);
+void onReceive(uint8_t *mac_addr, uint8_t *incomingData, uint8_t len) {
+  if(len == sizeof(msg)) {
+    memcpy(&data, incomingData, sizeof(data));
+    Serial.print("Empfangen: ");
+    Serial.println(data.value);
+  }
 }
 
 void setup() {
@@ -22,6 +24,8 @@ void setup() {
     return;
   }
 
+  // registriere Callback
+  esp_now_set_self_role(ESP_NOW_ROLE_COMBO); // 1.0.6 benötigt Role
   esp_now_register_recv_cb(onReceive);
 }
 
