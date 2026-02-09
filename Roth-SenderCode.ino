@@ -12,6 +12,10 @@ msg data;
 void setup() {
   Serial.begin(115200);
   WiFi.mode(WIFI_STA);
+  delay(1000);
+
+  Serial.print("Sender MAC: ");
+  Serial.println(WiFi.macAddress());
 
   if (esp_now_init() != 0) {
     Serial.println("ESP-NOW init failed");
@@ -21,14 +25,17 @@ void setup() {
   esp_now_peer_info_t peer;
   memset(&peer, 0, sizeof(peer));
   memcpy(peer.peer_addr, repeaterMac, 6);
-  peer.channel = 1; // alle auf Kanal 1
+  peer.channel = 1;
   peer.encrypt = false;
-  esp_now_add_peer(&peer);
+  if (esp_now_add_peer(&peer) != ESP_OK) {
+    Serial.println("Fehler beim Hinzufügen des Peers");
+  }
 }
 
 void loop() {
   data.value = random(0, 100);
   esp_now_send(repeaterMac, (uint8_t*)&data, sizeof(data));
+  Serial.print("Gesendet: ");
   Serial.println(data.value);
   delay(1000);
 }
