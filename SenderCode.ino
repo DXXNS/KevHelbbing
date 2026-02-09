@@ -1,7 +1,7 @@
 #include <esp_now.h>
 #include <WiFi.h>
 
-uint8_t repeaterMac[] = {0x24, 0x6F, 0x28, 0x11, 0x22, 0x33}; // repeater MAC also mac addresse vom lö repeaterle
+uint8_t repeaterMac[] = {0xA0, 0xA3, 0xB3, 0x97, 0x81, 0x00}; // MAC vom Repeater
 
 typedef struct msg {
   int value;
