@@ -18,6 +18,7 @@ void onReceive(const uint8_t *mac_addr, const uint8_t *incomingData, int len) {
 void setup() {
   Serial.begin(115200);
   WiFi.mode(WIFI_STA);
+  Serial.println("wiffles initialized");
 
   if (esp_now_init() != 0) {
     Serial.println("ESP-NOW init failed");
