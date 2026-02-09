@@ -1,1 +1,0 @@
-C:\Users\<dein name>\AppData\Local\Arduino15\packages\esp32
