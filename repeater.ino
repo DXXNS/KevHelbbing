@@ -32,7 +32,7 @@ void setup() {
   memcpy(peer.peer_addr, receiverMac, 6);
   peer.channel = 0;
   peer.encrypt = false;
-  if(esp_now_add_peer(&peer) != ESP_OK) {
+  if (esp_now_add_peer(&peer) != ESP_OK) {
     Serial.println("Fehler beim Hinzufügen des Peers");
   }
 
