@@ -1,7 +1,8 @@
 #include <esp_now.h>
 #include <WiFi.h>
 
-uint8_t receiverMac[] = {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0xCC}; // receiver MAC also magg address von lö letzte esp
+uint8_t receiverMac[] = {0xD4, 0x8A, 0xFC, 0xA3, 0x59, 0xB8}; // main receiver MAC
+
 
 typedef struct msg {
   int value;
