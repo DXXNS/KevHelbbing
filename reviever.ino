@@ -7,7 +7,7 @@ typedef struct msg {
 
 msg data;
 
-void onReceive(uint8_t *mac_addr, uint8_t *incomingData, uint8_t len) {
+void onReceive(const uint8_t *mac_addr, const uint8_t *incomingData, int len) {
   if(len == sizeof(msg)) {
     memcpy(&data, incomingData, sizeof(data));
     Serial.print("Empfangen: ");
