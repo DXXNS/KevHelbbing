@@ -1,7 +1,7 @@
 #include <WiFi.h>
 #include <esp_now.h>
 
-uint8_t repeaterMac[] = {0xA0, 0xA3, 0xB3, 0x97, 0x81, 0x00}; // MAC vom Repeater
+uint8_t repeaterMac[] = {0xA0, 0xA3, 0xB3, 0x97, 0x81, 0x00};
 
 typedef struct msg {
   int value;
@@ -14,28 +14,21 @@ void setup() {
   WiFi.mode(WIFI_STA);
 
   if (esp_now_init() != 0) {
-    Serial.println("Fehler beim Initialisieren von ESP-NOW");
+    Serial.println("ESP-NOW init failed");
     return;
   }
 
   esp_now_peer_info_t peer;
   memset(&peer, 0, sizeof(peer));
   memcpy(peer.peer_addr, repeaterMac, 6);
-  peer.channel = 0;
+  peer.channel = 1; // alle auf Kanal 1
   peer.encrypt = false;
-  if (esp_now_add_peer(&peer) != ESP_OK) {
-    Serial.println("Fehler beim Hinzufügen des Peers");
-  }
+  esp_now_add_peer(&peer);
 }
 
 void loop() {
   data.value = random(0, 100);
-  esp_err_t result = esp_now_send(repeaterMac, (uint8_t*)&data, sizeof(data));
-  if(result == ESP_OK){
-    Serial.print("Gesendet: ");
-    Serial.println(data.value);
-  } else {
-    Serial.println("Senden fehlgeschlagen");
-  }
+  esp_now_send(repeaterMac, (uint8_t*)&data, sizeof(data));
+  Serial.println(data.value);
   delay(1000);
 }
