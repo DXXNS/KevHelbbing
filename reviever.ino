@@ -24,8 +24,6 @@ void setup() {
     return;
   }
 
-  // registriere Callback
-  esp_now_set_self_role(ESP_NOW_ROLE_COMBO); // 1.0.6 benötigt Role
   esp_now_register_recv_cb(onReceive);
 }
 
