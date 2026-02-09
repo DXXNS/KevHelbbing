@@ -1,5 +1,5 @@
 
-````markdown
+
 # ESP-NOW Projekt
 
 Dieses Projekt zeigt ein einfaches ESP-NOW Netzwerk mit drei ESP32-Geräten: **Sender → Repeater → Receiver**.  
@@ -26,7 +26,7 @@ Eindeutige MAC-Adresse des Repeaters.
 typedef struct msg {
   int value;
 } msg;
-````
+```
 
 **Setup:**
 
@@ -162,4 +162,5 @@ Sender (🔴) → Repeater (⚫) → Receiver (🔵)
 * Debug-Ausgaben im Serial Monitor anzeigen
 
 ---
+
 
