@@ -7,7 +7,7 @@ typedef struct msg {
 
 msg data;
 
-void onReceive(const esp_now_recv_info *info, const uint8_t *incomingData, int len) {
+void onReceive(uint8_t *mac, uint8_t *incomingData, uint8_t len) {
   memcpy(&data, incomingData, sizeof(data));
   Serial.print("empfangen: ");
   Serial.println(data.value);
@@ -17,7 +17,11 @@ void setup() {
   Serial.begin(115200);
   WiFi.mode(WIFI_STA);
 
-  esp_now_init();
+  if (esp_now_init() != 0) {
+    Serial.println("Fehler beim Initialisieren von ESP-NOW");
+    return;
+  }
+
   esp_now_register_recv_cb(onReceive);
 }
 
